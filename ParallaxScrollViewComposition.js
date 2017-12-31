@@ -3,8 +3,10 @@
  */
 'use strict';
 
-var isArray = require('lodash/lang/isArray');
+import _ from 'lodash'
 var React = require('react');
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 var {
   Animated,
   ScrollView
@@ -13,9 +15,9 @@ var {
 var ParallaxImage = require('./ParallaxImage');
 
 var applyPropsToParallaxImages = function(children, props) {
-  if(isArray(children)) {
+  if(_.isArray(children)) {
     return children.map(child => {
-      if(isArray(child)) {
+      if(_.isArray(child)) {
         return applyPropsToParallaxImages(child, props);
       }
       if(child.type === ParallaxImage) {
@@ -31,9 +33,9 @@ var applyPropsToParallaxImages = function(children, props) {
 };
 
 
-var ParallaxScrollViewComposition = React.createClass({
+var ParallaxScrollViewComposition = createReactClass({
   propTypes: {
-    scrollViewComponent: React.PropTypes.func,
+    scrollViewComponent: PropTypes.func,
   },
 
   setNativeProps: function(nativeProps) {

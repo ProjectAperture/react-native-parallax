@@ -3,8 +3,10 @@
  */
 'use strict';
 
-var isEqual = require('lodash/lang/isEqual');
+import _ from 'lodash';
 var React = require('react');
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 var {
   View,
   Image,
@@ -16,15 +18,7 @@ var {
 
 var WINDOW_HEIGHT = Dimensions.get('window').height;
 
-var ParallaxImage = React.createClass({
-  propTypes: {
-    onPress:        React.PropTypes.func,
-    scrollY:        React.PropTypes.object,
-    parallaxFactor: React.PropTypes.number,
-    imageStyle:     Image.propTypes.style,
-    overlayStyle:   View.propTypes.style,
-  },
-
+var ParallaxImage = createReactClass({
   getDefaultProps: function() {
     return {
       parallaxFactor: 0.2,
@@ -52,7 +46,7 @@ var ParallaxImage = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    if(!isEqual(nextProps, this.props)) {
+    if(!_.isEqual(nextProps, this.props)) {
       this.isLayoutStale = true;
     }
   },
